@@ -1,0 +1,403 @@
+* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+*  文件名：XT_XCODE.PRG      应用于系统中的加密解密的一些共用程序
+* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+*  包含的过程有 HJR 2005-1-12
+
+*****************************************************************
+*判定软件加密机制是否完整                      HJR 2005-1-12
+FUNCTION GET_CODE
+*****************************************************************
+* 测试文件是否存在
+*IF FILE("REG.DLL")
+*ELSE
+*    RETURN .F.
+*ENDIF
+* 申明函数
+DECLARE INTEGER GetDllVersion IN "REG.DLL" STRING lpOutBuffer
+* 定义缓冲区
+LPOUTBUFFER = SPACE(60)
+*取得版本号
+RET = 0
+M_COPY = ""
+RET = GETDLLVERSION( @LPOUTBUFFER )
+IF RET>0
+    M_COPY = ALLT(LPOUTBUFFER)
+ELSE
+    RETURN .F.
+ENDIF
+*?M_COPY
+IF M_COPY="v3.6.2"
+ELSE
+    RETURN .F.
+ENDIF
+CLEAR DLLS "GetDllVersion"
+PUBLIC P_REGXCODE
+P_REGXCODE="user-12345678"
+RETURN .T.
+ENDFUNC
+
+*****************************************************************
+*取得硬盘序列号                      HJR 2005-1-12
+FUNCTION GET_HDID
+*****************************************************************
+IF GET_CODE()
+ELSE
+    RETURN ""
+ENDIF
+* 申明dll中的函数
+DECLARE INTEGER GetHardDiskId IN "GETXCODE.DLL" STRING lpOutBuffer,STRING lpRegisterCode
+* 准备输入输出缓冲区
+LPOUTBUFFER		= SPACE(200)
+LPREGISTERCODE	= P_REGXCODE
+M_HDID=""
+* 调用函数
+IF GETHARDDISKID( @LPOUTBUFFER, @LPREGISTERCODE ) > 0
+    M_HDID = ALLT(LPOUTBUFFER)
+ELSE
+*如果无法认出,则返回一个固定的
+*    M_HDID = "T2C6K4PE"
+    M_HDID = ""
+ENDIF
+* 释放函数
+CLEAR DLLS "GetHardDiskId"
+RETURN M_HDID
+ENDFUNC
+
+*****************************************************************
+*取得硬盘序列号                      HJR 2005-1-12
+FUNCTION GET_MACADD
+*****************************************************************
+IF GET_CODE()
+ELSE
+    RETURN ""
+ENDIF
+* 申明dll中的函数
+DECLARE INTEGER GetMACAddress IN "GETXCODE.DLL" STRING lpOutBuffer,STRING lpRegisterCode
+* 准备输入输出缓冲区
+LPOUTBUFFER		= SPACE(200)
+LPREGISTERCODE	= P_REGXCODE
+M_MACADD=""
+* 调用函数
+IF GETMACADDRESS( @LPOUTBUFFER, @LPREGISTERCODE ) > 0
+    M_MACADD = ALLT(LPOUTBUFFER)
+ELSE
+*如果无法认出,则返回一个固定的
+    M_MACADD = "00-04-61-70-96-49"
+ENDIF
+* 释放函数
+CLEAR DLLS "GetMACAddress"
+M_MACADD=STUFF(M_MACADD, 3, 1, "")
+M_MACADD=STUFF(M_MACADD, 5, 1, "")
+M_MACADD=STUFF(M_MACADD, 7, 1, "")
+M_MACADD=STUFF(M_MACADD, 9, 1, "")
+M_MACADD=STUFF(M_MACADD, 11, 1, "")
+RETURN M_MACADD
+ENDFUNC
+
+*****************************************************************
+*取得主板序列号                      HJR 2005-1-12
+FUNCTION GET_MBID
+*****************************************************************
+IF GET_CODE()
+ELSE
+    RETURN ""
+ENDIF
+* 申明dll中的函数
+DECLARE INTEGER GetMainBoardId IN "GETXCODE.DLL" STRING lpOutBuffer,STRING lpRegisterCode
+* 准备输入输出缓冲区
+LPOUTBUFFER		= SPACE(200)
+LPREGISTERCODE	= P_REGXCODE
+M_MBID=""
+* 调用函数
+IF GETMAINBOARDID( @LPOUTBUFFER, @LPREGISTERCODE ) > 0
+    M_MBID = ALLT(LPOUTBUFFER)
+ELSE
+    M_MBID = ""
+ENDIF
+* 释放函数
+CLEAR DLLS "GetMainBoardId"
+RETURN M_MBID
+ENDFUNC
+
+*****************************************************************
+*取得MD5                      HJR 2005-1-12
+FUNCTION GET_MD5E
+*****************************************************************
+PARA M_MD5E
+IF GET_CODE()
+ELSE
+    RETURN ""
+ENDIF
+* 申明dll中的函数
+DECLARE INTEGER MD5Encrypt IN "GETXCODE.DLL" STRING lpInBuffer,STRING lpOutBuffer,INTEGER LENGTH,STRING lpRegisterCode
+* 准备输入输出缓冲区
+LPINBUFFER		= M_MD5E
+LENGTH			= LEN(LPINBUFFER)
+LPOUTBUFFER		= SPACE(200)
+LPREGISTERCODE	= P_REGXCODE
+IF LENGTH=0 .OR. EMPTY(LPINBUFFER)
+    RETURN ""
+ENDIF
+M_MD5R=""
+* 调用函数
+IF MD5ENCRYPT( @LPINBUFFER,@LPOUTBUFFER,LENGTH,LPREGISTERCODE ) > 0
+    M_MD5R = ALLT(LPOUTBUFFER)
+ELSE
+    M_MD5R = ""
+ENDIF
+* 释放函数
+CLEAR DLLS "MD5Encrypt"
+* end
+RETURN M_MD5R
+ENDFUNC
+
+*****************************************************************
+*BLOWFISH                      HJR 2005-1-12
+FUNCTION GET_BLOWFISH
+*****************************************************************
+PARA M_BLOWFISH,M_J
+IF GET_CODE()
+ELSE
+    RETURN ""
+ENDIF
+* 准备输入输出缓冲区
+LPINBUFFER		= ALLT(M_BLOWFISH)
+KEYSTR			= "2A7E8B3F61CBE4F7"
+LPOUTBUFFER		= SPACE(200)
+LPREGISTERCODE	= P_REGXCODE
+IF EMPTY(LPINBUFFER)
+    RETURN ""
+ENDIF
+
+RET=0
+IF M_J="+"		&& 加密操作
+* 申明dll中的函数
+    DECLARE INTEGER BlowFishEncrypt IN "GETXCODE.DLL" STRING lpInBuffer,STRING KeyStr,STRING lpOutBuffer,STRING lpRegisterCode
+* 调用函数
+    RET = BLOWFISHENCRYPT( @LPINBUFFER,@KEYSTR,@LPOUTBUFFER,LPREGISTERCODE )
+ENDIF
+IF M_J="-"      && 解密操作
+* 申明dll中的函数
+    DECLARE INTEGER BlowFishDecrypt IN "GETXCODE.DLL" STRING lpInBuffer,STRING KeyStr,STRING lpOutBuffer,STRING lpRegisterCode
+* 调用函数
+    RET = BLOWFISHDECRYPT( @LPINBUFFER,@KEYSTR,@LPOUTBUFFER,LPREGISTERCODE )
+ENDIF
+M_RBF=""
+IF RET > 0
+    M_RBF = SUBS(ALLT(LPOUTBUFFER),1,LEN(ALLT(LPOUTBUFFER))-1)
+ELSE
+    M_RBF = ""
+ENDIF
+* 释放函数
+CLEAR DLLS "BlowFishEncrypt","BlowFishDecrypt"
+* end
+RETURN M_RBF
+ENDFUNC
+
+*****************************************************************
+*EncryptStringFun1                      HJR 2005-1-12
+FUNCTION GET_SFUN1
+*****************************************************************
+PARA M_SFUN1,M_J
+IF GET_CODE()
+ELSE
+    RETURN ""
+ENDIF
+* 准备输入输出缓冲区
+LPINBUFFER		= ALLT(M_SFUN1)
+KEYSTR			= "3E1D5F6E9D6E3C1F"
+LPOUTBUFFER		= SPACE(LEN(LPINBUFFER)*2+10)
+LPREGISTERCODE	= P_REGXCODE
+IF EMPTY(LPINBUFFER)
+    RETURN ""
+ENDIF
+
+RET=0
+IF M_J="+"		&& 加密操作
+* 申明dll中的函数
+    DECLARE INTEGER EncryptStringFun1 IN "GETXCODE.DLL" STRING lpInBuffer,STRING KeyStr,STRING lpOutBuffer,STRING lpRegisterCode
+* 调用函数
+    RET = ENCRYPTSTRINGFUN1( @LPINBUFFER,@KEYSTR,@LPOUTBUFFER,LPREGISTERCODE )
+ENDIF
+IF M_J="-"      && 解密操作
+* 申明dll中的函数
+    DECLARE INTEGER DecryptStringFun1 IN "GETXCODE.DLL" STRING lpInBuffer,STRING KeyStr,STRING lpOutBuffer,STRING lpRegisterCode
+* 调用函数
+    RET = DECRYPTSTRINGFUN1( @LPINBUFFER,@KEYSTR,@LPOUTBUFFER,LPREGISTERCODE )
+ENDIF
+M_RSFUN=""
+IF RET > 0
+    M_RSFUN = ALLT(LPOUTBUFFER)
+ELSE
+    M_RSFUN = ""
+ENDIF
+* 释放函数
+CLEAR DLLS "EncryptStringFun1","DecryptStringFun1"
+* end
+RETURN M_RSFUN
+ENDFUNC
+
+*****************************************************************
+*EncryptStringFun2                      HJR 2005-1-12
+FUNCTION GET_SFUN2
+*****************************************************************
+PARA M_SFUN1,M_J
+IF GET_CODE()
+ELSE
+    RETURN ""
+ENDIF
+* 准备输入输出缓冲区
+LPINBUFFER		= ALLT(M_SFUN1)
+KEYSTR			= "9D6E3C1F3E1D5F6E"
+LPOUTBUFFER		= SPACE(LEN(LPINBUFFER)*2+10)
+LPREGISTERCODE	= P_REGXCODE
+IF EMPTY(LPINBUFFER)
+    RETURN ""
+ENDIF
+
+RET=0
+IF M_J="+"		&& 加密操作
+* 申明dll中的函数
+    DECLARE INTEGER EncryptStringFun2 IN "GETXCODE.DLL" STRING lpInBuffer,STRING KeyStr,STRING lpOutBuffer,STRING lpRegisterCode
+* 调用函数
+    RET = ENCRYPTSTRINGFUN2( @LPINBUFFER,@KEYSTR,@LPOUTBUFFER,LPREGISTERCODE )
+ENDIF
+IF M_J="-"      && 解密操作
+* 申明dll中的函数
+    DECLARE INTEGER DecryptStringFun2 IN "GETXCODE.DLL" STRING lpInBuffer,STRING KeyStr,STRING lpOutBuffer,STRING lpRegisterCode
+* 调用函数
+    RET = DECRYPTSTRINGFUN2( @LPINBUFFER,@KEYSTR,@LPOUTBUFFER,LPREGISTERCODE )
+ENDIF
+M_RSFUN=""
+IF RET > 0
+    M_RSFUN = ALLT(LPOUTBUFFER)
+ELSE
+    M_RSFUN = ""
+ENDIF
+* 释放函数
+CLEAR DLLS "EncryptStringFun2","DecryptStringFun2"
+* end
+RETURN M_RSFUN
+ENDFUNC
+
+*****************************************************************
+*RAS                      HJR 2005-1-12
+FUNCTION GET_RAS
+*****************************************************************
+PARA M_RAS,M_J
+IF GET_CODE()
+ELSE
+    RETURN ""
+ENDIF
+LPINBUFFER		= ALLT(M_RAS)
+N_STR			= "BE3585F8BDA0B628857C9E3D4CB0DCCB9C5479ED0BF6E5204BCD52F23D183E85"
+D_STR			= "29DD4A0C6265CE8DADA7B86A9BC233D03D7AACB31E179FBB96571A4611B06FE3"
+*N_Str			= "7FCD9553C4D4D1E32770053911114B65"
+*D_Str			= "671DE2B0307E8A6B7A58103613D8B1C7"
+KEYMODE         = 1
+LPOUTBUFFER		= SPACE(512)
+LPREGISTERCODE	= P_REGXCODE
+IF EMPTY(LPINBUFFER)
+    RETURN ""
+ENDIF
+STRISOK=.F.
+TMPCHAR=''
+FOR M_I=1 TO LEN(LPINBUFFER)
+    TMPCHAR=SUBSTR(LPINBUFFER,M_I,1)
+    STRISOK=BETWEEN(TMPCHAR,'0','9') .OR. BETWEEN(TMPCHAR,'A','F') .OR. BETWEEN(TMPCHAR,'a','f')
+    IF STRISOK=.F.
+*        messagebox("输入字串中含有非法字符,正确范围是 0~9,A~F,a~f  !",48,'错误')
+        RETURN ""
+    ENDIF
+ENDFOR
+*
+FOR M_I=1 TO LEN(N_STR)
+    TMPCHAR=SUBSTR(N_STR,M_I,1)
+    STRISOK=BETWEEN(TMPCHAR,'0','9') .OR. BETWEEN(TMPCHAR,'A','F') .OR. BETWEEN(TMPCHAR,'a','f')
+*    ?tmpchar
+*    ??ASC(tmpchar)
+    IF STRISOK=.F.
+*        messagebox("模数N中含有非法字符,正确范围是 0~9,A~F,a~f  !",48,'错误')
+        RETURN ""
+    ENDIF
+ENDFOR
+*
+IF M_J="+"
+    FOR M_I=1 TO LEN(D_STR)
+        TMPCHAR=SUBSTR(D_STR,M_I,1)
+        STRISOK=BETWEEN(TMPCHAR,'0','9') .OR. BETWEEN(TMPCHAR,'A','F') .OR. BETWEEN(TMPCHAR,'a','f')
+        IF STRISOK=.F.
+*            messagebox("私钥D中含有非法字符,正确范围是 0~9,A~F,a~f  !",48,'错误')
+            RETURN ""
+        ENDIF
+    ENDFOR
+ENDIF
+IF LEN(LPINBUFFER) > LEN(N_STR)
+*        messagebox("输入字符大于N  !",48,'错误')
+    RETURN ""
+ENDIF
+RET=0
+IF M_J="+"		&& 加密操作
+* 申明dll中的函数
+    DECLARE INTEGER RSAEncrypt IN "GETXCODE.DLL" STRING lpInBuffer,STRING D_Str,STRING N_Str,INTEGER Mode,STRING lpOutBuffer,STRING lpRegisterCode
+* 调用函数
+    RET = RSAENCRYPT( @LPINBUFFER,@D_STR,@N_STR,KEYMODE,@LPOUTBUFFER,LPREGISTERCODE )
+ENDIF
+IF M_J="-"      && 解密操作
+* 申明dll中的函数
+    DECLARE INTEGER RSADecrypt IN "GETXCODE.DLL" STRING lpInBuffer,STRING N_Str,INTEGER Mode,STRING lpOutBuffer,STRING lpRegisterCode
+* 调用函数
+    RET = RSADECRYPT( @LPINBUFFER,@N_STR,KEYMODE,@LPOUTBUFFER,LPREGISTERCODE )
+ENDIF
+M_RSFUN=""
+IF RET > 0
+    M_RSFUN = SUBS(ALLT(LPOUTBUFFER),1,LEN(ALLT(LPOUTBUFFER))-1)
+ELSE
+    M_RSFUN = ""
+ENDIF
+CLEAR DLLS "RSAEncrypt","RSADecrypt"
+RETURN M_RSFUN
+ENDFUNC
+
+*****************************************************************
+*BLOWFISH                      HJR 2005-1-12
+FUNCTION GET_B64D
+*****************************************************************
+PARA M_B64D,M_J
+IF GET_CODE()
+ELSE
+    RETURN ""
+ENDIF
+* 准备输入输出缓冲区
+LPINBUFFER		= ALLT(M_B64D)
+LPOUTBUFFER		= SPACE(500)
+LPREGISTERCODE	= P_REGXCODE
+IF EMPTY(LPINBUFFER)
+    RETURN ""
+ENDIF
+
+RET=0
+IF M_J="+"		&& 加密操作
+* 申明dll中的函数
+    DECLARE INTEGER Base64Encode IN "GETXCODE.DLL" STRING lpInBuffer,STRING lpOutBuffer,STRING lpRegisterCode
+* 调用函数
+    RET = BASE64ENCODE( @LPINBUFFER,@LPOUTBUFFER,LPREGISTERCODE )
+ENDIF
+IF M_J="-"      && 解密操作
+* 申明dll中的函数
+    DECLARE INTEGER Base64Decode IN "GETXCODE.DLL" STRING lpInBuffer,STRING lpOutBuffer,STRING lpRegisterCode
+* 调用函数
+    RET = BASE64DECODE( @LPINBUFFER,@LPOUTBUFFER,LPREGISTERCODE )
+ENDIF
+M_RBF=""
+IF RET > 0
+    M_RBF = ALLT(LPOUTBUFFER)
+ELSE
+    M_RBF = ""
+ENDIF
+* 释放函数
+CLEAR DLLS "Base64Encode","Base64Decode"
+* end
+RETURN M_RBF
+ENDFUNC 				
+
