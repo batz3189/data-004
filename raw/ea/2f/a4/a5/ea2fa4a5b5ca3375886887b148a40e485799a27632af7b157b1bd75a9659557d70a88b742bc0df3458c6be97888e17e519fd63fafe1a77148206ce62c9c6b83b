@@ -1,0 +1,128 @@
+ACCESSING THE CD CONTENTS
+To most easily surf the contents of the CD, you will need to have a web browser installed on your computer. If you already have a web browser installed, launch the application and open the file "D:\Readme.htm" (where "D" is the designation of your CD drive).
+
+If you do not have a web browser installed, you can install Microsoft Internet Explorer 5.0 directly from the CD by running "D:\IE5-BH\IE5Setup.exe" (where "D" is the designation of your CD drive). Follow the directions on screen to complete the installation. After successfully installing the web browser, launch the application and open the file "D:\Readme.htm" (where "D" is the designation of your CD drive).
+
+System Requirements
+* 486 with a 66 MHz processor (Pentium processor recommended) or higher processor 
+
+* Microsoft Windows(r) 95 or later; or Microsoft Windows NT(r) Workstation operating system version 4.0
+
+* For Microsoft Windows 95 or Windows 98: 16 MB (megabytes) of RAM minimum
+
+* For Microsoft Windows NT 4: 32 MB of RAM minimum and Service Pack 3 (or higher)
+
+* 147 MB of available hard-disk space (Number indicates typical installation; your hard-disk usage will vary depending on configuration. Choices made during custom installation may require more or less hard-disk space.) 
+
+* CD-ROM drive 
+
+* VGA or higher-resolution monitor; Super VGA recommended
+
+Minimal install (browser-only):
+  	Required for install:	45 MB
+  	Required to run:	27 MB after restart
+
+Typical install:
+  	Required for install:	70 MB
+  	Required to run:	55 MB after restart
+
+Full install:
+  	Required for install:	111 MB
+  	Required to run:	80 MB after restart
+
+Some components may require additional systems resources not outlined above.
+
+DISK SPACE REQUIREMENTS FOR INTERNET EXPLORER 5 INSTALLATION
+Internet Explorer 5 and Internet Tools Setup install the majority of its files on the drive where the Windows operating system is installed, regardless of the installation location you choose. To free up space on your hard disk in order to meet the Internet Explorer 5 disk-space installation requirements, you must free up space on the drive where the Windows operating system is installed.
+
+
+
+Most the files have been prepared as web-ready (htm), Adobe Acrobat (pdf), and PowerPoint slideshows (pps). We’ve included these files in multiple formats to offer you greater viewing accesses than a single format would allow.
+
+Directory\File Location	File Description
+Readme.txt		Basic CD information
+Readme.htm		Main CD interface. Open this file within your web browser to link to the main CD contents
+\Art\Art.pdf		All color figures contained within one Adobe Acrobat file.
+\Art\Figure_2-7.gif	Color version of printed book figure.
+\Art\Figure_2-10.gif	Color version of printed book figure.
+\Art\Figure_2-12.gif	Color version of printed book figure.
+\Art\Figure_3-2.gif	Color version of printed book figure.
+\Art\Figure_3-3.gif	Color version of printed book figure.
+\Art\Figure_3-4.gif	Color version of printed book figure.
+\Art\Figure_3-5.gif	Color version of printed book figure.
+\Art\Figure_3-6.gif	Color version of printed book figure.
+\Art\Figure_3-8.gif	Color version of printed book figure.
+\Art\Figure_3-9.gif	Color version of printed book figure.
+\Art\Figure_3-10.gif	Color version of printed book figure.
+\Art\Figure_3-11.gif	Color version of printed book figure.
+\Art\Figure_3-12.gif	Color version of printed book figure.
+\Art\Figure_3-15.gif	Color version of printed book figure.
+\Art\Figure_3-16.gif	Color version of printed book figure.
+\Art\Figure_3-17.gif	Color version of printed book figure.
+\Art\Figure_3-18.gif	Color version of printed book figure.
+\Art\Figure_3-19.gif	Color version of printed book figure.
+\Art\Figure_5-2.gif	Color version of printed book figure.
+\Art\Figure_5-2A.gif	Color version of printed book figure.
+\Art\Figure_5-6.gif	Color version of printed book figure.
+\Art\Figure_5-12.gif	Color version of printed book figure.
+\Art\Figure_5-13.gif	Color version of printed book figure.
+\Art\Figure_5-14.gif	Color version of printed book figure.
+\Art\Figure_5-15.gif	Color version of printed book figure.
+\Art\Figure_5-26.gif	Color version of printed book figure.
+\Art\Figure_5-28.gif	Color version of printed book figure.
+\Art\Figure_5-29.gif	Color version of printed book figure.
+\Art\Figure_7-3.gif	Color version of printed book figure.
+\Art\Figure_7-8.gif	Color version of printed book figure.
+\Art\Figure_7-20.gif	Color version of printed book figure.
+\Art\Figure_7-22.gif	Color version of printed book figure.
+\Art\Figure_7-26.gif	Color version of printed book figure.
+\Art\Figure_7-27.gif	Color version of printed book figure.
+\Art\Figure_8-6.gif	Color version of printed book figure.
+\Art\Figure_8-7.gif	Color version of printed book figure. 
+\Art\Figure_8-13.gif	Color version of printed book figure.
+\Art\Figure_8-16.gif	Color version of printed book figure.
+\Presentations\Cadence\Cadence.htm	Cadence presentation saved as a web-ready htm.
+\Presentations\Cadence\Cadence.pps 	Cadence presentation saved as an independent PowerPoint file.
+\Presentations\Cadence\Cadence.exe	Cadence presentation packed with a PowerPoint viewer. Run file to extract.
+\Presentations\Cell Libraries\Cell Libraries.htm	MOSAID Cell library presentation saved as a web-ready htm.
+\Presentations\Cell Libraries\Cell Libraries.pps 	MOSAID Cell library presentation saved as PowerPoint file.
+\Presentations\Cell Libraries\Cell Libraries.exe	MOSAID Cell library presentation packed with a PowerPoint viewer.
+\Presentations\Cell Libraries\Cell Libraries.pdf	MOSAID Cell library presentations saved as an Adobe Acrobat pdfs \Presentations\Flows\Flows.htm	MOSAID Flows presentation saved as a web-ready htm.
+\Presentations\Flows\Flows.pps	MOSAID Flows presentation saved as an independent PowerPoint file.
+\Presentations\Flows\Flows.exe	MOSAID Flows presentation packed with a PowerPoint viewer. Run the exe file to extract.
+\Presentations\Flows\Flows.pdf	MOSAID Flows presentations saved as an Adobe Acrobat pdf. Launch Acrobat Reader to view.
+\Presentations\Mentor Graphics\Mentor Graphics.htm	Mentor Graphics presentation saved as a web-ready htm.
+\Presentations\Mentor Graphics\Mentor Graphics.pps	Mentor Graphics presentation saved as an independent PowerPoint file.
+\Presentations\Mentor Graphics\Mentor Graphics.exe	Mentor Graphics presentation packed with a PowerPoint viewer. 
+\Presentations\Sagantec\Sagantec.htm	Sagantec presentation saved as a web-ready htm.
+\Presentations\Sagantec\Sagantec.pps	Sagantec presentation saved as an independent PowerPoint file.
+\Presentations\Sagantec\Sagantec.exe	Sagantec presentation packed with a PowerPoint viewer. Run the exe file to extract.
+\Software\Acrobat Reader 4.0 + search\CD\Reader\ArcrRd32.exe	Adobe Acrobat Reader. Launch to run the program on CD.
+\Software\Acrobat Reader 4.0 + search\CD\Install\rs40eng.exe	Adobe Acrobat Reader installation program.
+\Software\IE5\ie5setup.exe	Microsoft Internet Explorer 5.0. Run the exe file to install this customized web browser.
+\Software\Tanner Tools\Setup.exe	Tanner Technologies Tool demo. Run exe to install this demo on your computer. 
+
+
+
+Copyright Information
+
+Newnes is an imprint of Butterworth-Heinemann. 
+Copyright 2000 by Butterworth-Heinemann
+A member of the Reed Elsevier Group
+All rights reserved.
+
+No part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form or by any means, electronic, mechanical, photocopying, recording, or otherwise, without the prior written permission of the publisher.
+
+The contents of this CD are provided on an "as is" basis without warranty of any kind concerning the accuracy or completeness of the software product. Neither the author, publisher nor the publisher's authorized resale agents shall be held responsible for any defect or claims concerning virus contamination, possible errors, omissions or other inaccuracies or be held liable for any loss or damage whatsoever arising out of the use or inability to use this software product.
+
+No party involved in the sale or distribution of this software is authorized to make any modification or addition whatsoever to this limited warranty.
+
+DEMO L-Edit(tm) V7.5 IC Layout Editor is the property of Tanner EDA, a division of Tanner Research, Inc.
+
+Adobe, the Adobe logo, Acrobat, the Acrobat logo are trademarks of Adobe Systems Incorporated.
+
+Microsoft, Windows, and Windows NT are either registered trademarks or trademarks of Microsoft Corporation in the United States and/or other countries.
+
+All other trademarks and registered trademarks are the property of their respective holders and are acknowledged.
+
+Beyond providing replacements for defective discs, Butterworth-Heinemann does not provide technical support for the software included on this CD-ROM. Send any requests for replacement of a defective disc to Newnes Press, Customer Service Dept., 225 Wildwood Avenue, Woburn, MA 01801-2041 or email techsupport@bhusa.com. Be sure to reference item number CD-71947-PC. 
