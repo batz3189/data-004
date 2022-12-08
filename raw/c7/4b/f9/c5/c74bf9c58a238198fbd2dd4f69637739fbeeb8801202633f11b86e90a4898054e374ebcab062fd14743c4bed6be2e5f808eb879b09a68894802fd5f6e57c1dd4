@@ -1,0 +1,50 @@
+REM GENRE Pop
+REM DATE 2009
+PERFORMER "陈奕迅"
+TITLE "上五楼的快活"
+FILE "陈奕迅.-.[上五楼的快活].专辑.(FLAC).ape" WAVE
+  TRACK 01 AUDIO
+    TITLE "在你身边"
+    FLAGS DCP
+    INDEX 01 00:00:00
+  TRACK 02 AUDIO
+    TITLE "这样一个麻烦"
+    FLAGS DCP
+    INDEX 01 04:13:67
+  TRACK 03 AUDIO
+    TITLE "多少"
+    FLAGS DCP
+    INDEX 01 08:11:57
+  TRACK 04 AUDIO
+    TITLE "Nothing Ever Happened"
+    FLAGS DCP
+    INDEX 01 13:08:41
+  TRACK 05 AUDIO
+    TITLE "你为什么哭了呢"
+    FLAGS DCP
+    INDEX 01 16:24:66
+  TRACK 06 AUDIO
+    TITLE "谋情害命"
+    FLAGS DCP
+    INDEX 01 21:14:20
+  TRACK 07 AUDIO
+    TITLE "我甲你"
+    FLAGS DCP
+    INDEX 01 24:52:12
+  TRACK 08 AUDIO
+    TITLE "心的距离"
+    FLAGS DCP
+    INDEX 01 28:19:65
+  TRACK 09 AUDIO
+    TITLE "床头灯"
+    FLAGS DCP
+    INDEX 01 33:41:48
+  TRACK 10 AUDIO
+    TITLE "给你"
+    FLAGS DCP
+    INDEX 01 38:29:40
+  TRACK 11 AUDIO
+    TITLE "从何说起"
+    FLAGS DCP
+    INDEX 00 43:12:12
+    INDEX 01 43:45:55
